@@ -1,7 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProductController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\CustomerController;
+use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,39 +19,18 @@ use App\Http\Controllers\ProductController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/home', function () {
+    return view('app');
 });
 
-Route::get('/product', function () {
-   return 'Product';
-})->name('product');
+Route::prefix('admin')->as('admin.')->group(function() {
+   Route::resource('category', CategoryController::class);
+   Route::resource('customer', CustomerController::class);
+   Route::resource('order', OrderController::class);
+   Route::resource('product', ProductController::class);
+   Route::resource('setting', SettingController::class);
+   Route::resource('user', UserController::class);
+});
 
-Route::get('/category', function () {
-    return 'Category';
-})->name('categories.index');
-
-Route::get('/news', function () {
-    return 'new';
-})->name('news.index');
-
-Route::get('/contact', function () {
-    return 'contact';
-})->name('contact.index');
-
-Route::get('/map', function () {
-    })->name('map.index');
-
-Route::get('/product-detail/{id}', [ProductController::class, 'show'])->name('product.show');
-
-Route::get('test/{id}', function ($id) {
-    return 'Id input: '.$id;
-})->name('test');
-
-Route::get('products', [ProductController::class, 'index']);
-
-//Route::get('/{slug?}/{id?}', function ($slug, $id=null) {
-//    return 'Slug= '.$slug.'<br>'. 'id= '.$id;
-//});
 
 
