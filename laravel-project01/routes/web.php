@@ -44,6 +44,9 @@ Route::get('test/{id}', function ($id) {
 })->name('test');
 
 Route::get('products', [ProductController::class, 'index']);
+Route::get('/test', function () {
+   return 'test';
+});
 
 //Route::get('/{slug?}/{id?}', function ($slug, $id=null) {
 //    return 'Slug= '.$slug.'<br>'. 'id= '.$id;
