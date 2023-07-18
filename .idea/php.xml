@@ -116,4 +116,9 @@
       <path value="$PROJECT_DIR$/laravel-project01/vendor/graham-campbell/result-type" />
     </include_path>
   </component>
+  <component name="PhpUnit">
+    <phpunit_settings>
+      <PhpUnitSettings custom_loader_path="$PROJECT_DIR$/laravel-project01/vendor/autoload.php" />
+    </phpunit_settings>
+  </component>
 </project>
