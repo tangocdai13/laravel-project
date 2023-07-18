@@ -9,29 +9,28 @@ class StudentController extends Controller
 {
     public function index()
     {
-        $students = $this->dataStudent();
-        return view('students.list', ['students' => $students]);
+        return view('students.list',
+            ['students' => $this->dataStudent()]
+        );
     }
 
     public function show($id)
     {
         $students = $this->dataStudent();
         $student = null;
-
         foreach ($students as $item) {
             if($item['id'] == $id ) {
                 $student = $item;
                 break;
             }
         }
-
-        if ($student) {
-            return view('students.show', [
-                'student' => $student
-            ]);
-        } else {
-            return "No data";
+        if ($item['id'] != $id) {
+            return 'No data';
         }
+
+        return view('students.show', [
+            'student' => $student
+        ]);
     }
 
     public function dataStudent()
