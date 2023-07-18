@@ -7,37 +7,18 @@ use Illuminate\Http\Request;
 
 class StudentController extends Controller
 {
-    protected $students;
-
-    public function __construct()
-    {
-        $this->students = [
-            [
-                'id' => 1,
-                'name' => 'Student 01'
-            ],
-            [
-                'id' => 2,
-                'name' => 'Student 02'
-            ],
-            [
-                'id' => 3,
-                'name' => 'Student 03'
-            ],
-        ];
-    }
-
     public function index()
     {
-        $students = $this->students;
+        $students = $this->dataStudent();
         return view('students.list', ['students' => $students]);
     }
 
     public function show($id)
     {
+        $students = $this->dataStudent();
         $student = null;
 
-        foreach ($this->students as $item) {
+        foreach ($students as $item) {
             if($item['id'] == $id ) {
                 $student = $item;
                 break;
@@ -51,5 +32,25 @@ class StudentController extends Controller
         } else {
             return "No data";
         }
+    }
+
+    public function dataStudent()
+    {
+        $students = [
+            [
+                'id' => 1,
+                'name' => 'Student 01'
+            ],
+            [
+                'id' => 2,
+                'name' => 'Student 02'
+            ],
+            [
+                'id' => 3,
+                'name' => 'Student 03'
+            ],
+        ];
+
+        return $students;
     }
 }
