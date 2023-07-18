@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\StudentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,39 +17,15 @@ use App\Http\Controllers\ProductController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+//Route for student
+Route::get('/students', [StudentController::class, 'index'])->name('list.student');
+Route::get('/students/{id}', [StudentController::class, 'show']);
+
+//Route prefix for product, category, user
+Route::prefix('admin')->group(function () {
+    Route::get('/products', [ProductController::class, 'index']);
+    Route::get('/categories', [CategoryController::class, 'index']);
+    Route::get('/users', [UserController::class, 'index']);
 });
-
-Route::get('/product', function () {
-   return 'Product';
-})->name('product');
-
-Route::get('/category', function () {
-    return 'Category';
-})->name('categories.index');
-
-Route::get('/news', function () {
-    return 'new';
-})->name('news.index');
-
-Route::get('/contact', function () {
-    return 'contact';
-})->name('contact.index');
-
-Route::get('/map', function () {
-    })->name('map.index');
-
-Route::get('/product-detail/{id}', [ProductController::class, 'show'])->name('product.show');
-
-Route::get('test/{id}', function ($id) {
-    return 'Id input: '.$id;
-})->name('test');
-
-Route::get('products', [ProductController::class, 'index']);
-
-//Route::get('/{slug?}/{id?}', function ($slug, $id=null) {
-//    return 'Slug= '.$slug.'<br>'. 'id= '.$id;
-//});
 
 
