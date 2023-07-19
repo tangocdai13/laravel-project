@@ -1,2 +1,1 @@
-<h2>User Page Manegement</h2>
-{{ now()->format('') }}
+<h2>Đây là trang user</h2>
