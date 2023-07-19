@@ -36,7 +36,6 @@ Route::prefix('admin')->as('admin.')->group(function() {
    Route::resource('user', UserController::class);
 });
 
-=======
 //Route for student
 Route::get('/students', [StudentController::class, 'index'])->name('list.student');
 Route::get('/students/{id}', [StudentController::class, 'show']);
