@@ -21,13 +21,13 @@
                         <table class="table table-bordered">
                             <thead>
                             <tr>
-                                <th scope="col">ID</th>
+                                <th scope="col" width="5%">ID</th>
                                 <th scope="col">Name</th>
                                 <th scope="col">Email</th>
                                 <th scope="col">Phone</th>
                                 <th scope="col">Address</th>
                                 <th scope="col">gender</th>
-                                <th scope="col">hành động</th>
+                                <th scope="col" width="20%">hành động</th>
                             </tr>
                             </thead>
                             <tbody>
