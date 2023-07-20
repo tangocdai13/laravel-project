@@ -167,7 +167,7 @@
         <div class="sidebar-inner slimscroll">
             <div id="sidebar-menu" class="sidebar-menu">
                 <ul>
-                    <li class="active">
+                    <li class="<?= request()->is('admin*') ? 'active' : false?>">
                         <a href="{{ route('admin.dashboard') }}"><i class="fe fe-home"></i> <span>Dashboard</span></a>
                     </li>
                     <li>

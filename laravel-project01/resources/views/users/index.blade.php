@@ -14,8 +14,9 @@
                             <button class="btn" type="submit"><i class="fa fa-search"></i></button>
                         </div>
                     </div>
-                    <a href="{{ route('admin.user.create') }}" class="btn btn-success" >Create User</a>
-                    <hr>
+                    <div class="card-header">
+                        <a href="{{ route('admin.user.create') }}" class="btn btn-primary" >Create User</a>
+                    </div>
                     <div class="card-body">
                         <table class="table table-bordered">
                             <thead>
