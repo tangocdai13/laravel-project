@@ -26,12 +26,12 @@
             </tr>
             </thead>
             <tbody>
-            <?php foreach ($students as $key=>$student): ?>
+            <?php foreach ($students as $key => $student) { ?>
             <tr>
                 <td><?= $student['id']; ?></td>
                 <td><?= $student['name']; ?></td>
             </tr>
-            <?php endforeach;?>
+            <?php }?>
             </tbody>
         </table>
     </div>

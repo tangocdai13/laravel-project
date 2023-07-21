@@ -114,6 +114,8 @@
       <path value="$PROJECT_DIR$/laravel-project01/vendor/tijsverkoyen/css-to-inline-styles" />
       <path value="$PROJECT_DIR$/laravel-project01/vendor/dragonmantank/cron-expression" />
       <path value="$PROJECT_DIR$/laravel-project01/vendor/graham-campbell/result-type" />
+      <path value="$PROJECT_DIR$/laravel-project01/vendor/maximebf/debugbar" />
+      <path value="$PROJECT_DIR$/laravel-project01/vendor/barryvdh/laravel-debugbar" />
     </include_path>
   </component>
   <component name="PhpUnit">
