@@ -1,16 +1,13 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CustomerController;
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\StudentController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,28 +20,13 @@ use App\Http\Controllers\StudentController;
 |
 */
 
-Route::get('/home', function () {
-    return view('app');
+//dashboard used group prefix
+Route::prefix('admin')->as('admin.')->group(function () {
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+    Route::resource('category', CategoryController::class);
+    Route::resource('customer', CustomerController::class);
+    Route::resource('order', OrderController::class);
+    Route::resource('product', ProductController::class);
+    Route::resource('setting', SettingController::class);
+    Route::resource('user', UserController::class);
 });
-
-Route::prefix('admin')->as('admin.')->group(function() {
-   Route::resource('category', CategoryController::class);
-   Route::resource('customer', CustomerController::class);
-   Route::resource('order', OrderController::class);
-   Route::resource('product', ProductController::class);
-   Route::resource('setting', SettingController::class);
-   Route::resource('user', UserController::class);
-});
-
-//Route for student
-Route::get('/students', [StudentController::class, 'index'])->name('list.student');
-Route::get('/students/{id}', [StudentController::class, 'show']);
-
-//Route prefix for product, category, user
-Route::prefix('admin')->group(function () {
-    Route::get('/products', [ProductController::class, 'index']);
-    Route::get('/categories', [CategoryController::class, 'index']);
-    Route::get('/users', [UserController::class, 'index']);
-});
-
-
