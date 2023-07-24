@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\EmployeeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,3 +31,5 @@ Route::prefix('admin')->as('admin.')->group(function () {
     Route::resource('setting', SettingController::class);
     Route::resource('user', UserController::class);
 });
+
+Route::resource('employee', EmployeeController::class);
