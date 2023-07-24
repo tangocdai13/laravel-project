@@ -3,11 +3,11 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Rules\Number;
-use App\Rules\CheckAddress;
+use App\Rules\CheckNumberForPhoneRule;
+use App\Rules\CheckAddressRule;
 use App\Rules\CheckValueForMemberRule;
-use Illuminate\Validation\Rule;
-
+use App\Rules\CheckValidateForYearExperienceRule;
+use App\Rules\CheckValidateUrlRule;
 
 class EmployeeRequest extends FormRequest
 {
@@ -19,7 +19,7 @@ class EmployeeRequest extends FormRequest
     protected $locations;
     public function authorize()
     {
-        $this->locations = request()->all()['locations'];
+        $this->locations = request()->locations;
         return true;
     }
 
@@ -33,13 +33,14 @@ class EmployeeRequest extends FormRequest
         return [
             'name' => ['required', 'min:2', 'max:255','alpha_num'],
             'email' => ['required', 'min:2', 'max:255','email'],
-            'phone' => ['required', new Number],
-            'address' => ['required', 'min:5', new CheckAddress],
+            'phone' => ['required', new CheckNumberForPhoneRule],
+            'address' => ['required', 'min:5', new CheckAddressRule],
+            'file' => ['required', 'mimes:png,jpg', 'max:10000'],
             'gender' => ['required', 'in:1,2'],
             'locations' => ['required'],
             'person_dependent' => ['nullable', 'integer', new CheckValueForMemberRule],
-            'year_experience' => [Rule::requiredIf($this->locations != 4),'integer', 'min:2'],
-            'facebookUrl' => [Rule::requiredIf($this->locations != 4), 'url'],
+            'year_experience' => [new CheckValidateForYearExperienceRule, ],
+            'facebookUrl' => [new CheckValidateUrlRule],
         ];
     }
 
@@ -52,6 +53,7 @@ class EmployeeRequest extends FormRequest
             'max' => ':attribute lớn nhất :max ký tự',
             'email' => ':attribute phải đúng định dạng email',
             'gender.required' => ':attribute bắt buộc phải chọn 1 cái',
+            'mimes' => ':attribute không đúng định dạng file'
         ];
     }
 
@@ -60,7 +62,9 @@ class EmployeeRequest extends FormRequest
         return [
             'name' => 'Name Employee',
             'email' => 'Email Employee',
-            'phone' => 'Phone Employee'
+            'phone' => 'Phone Employee',
+            'year_experience' => 'Số năm kinh nghiệm',
+            'facebookUrl' => 'URL Facebook',
         ];
     }
 }

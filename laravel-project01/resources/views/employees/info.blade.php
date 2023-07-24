@@ -26,7 +26,7 @@
                 <label for="" class="col-form-label">Người phụ thuộc</label>
             </div>
             <div class="col-auto">
-                <input type="text" class="form-control" name="person_dependent" >
+                <input type="text" class="form-control" name="person_dependent" value="{{ old('person_dependent') }}" />
             </div>
             @error('person_dependent')
             <span style="color: red">{{ $message }}</span>
@@ -38,7 +38,7 @@
                 <label for="" class="col-form-label">Số năm kinh nghiệm</label>
             </div>
             <div class="col-auto">
-                <input type="text" class="form-control" name="year_experience">
+                <input type="text" class="form-control" name="year_experience" value="{{ old('year_experience') }}" />
             </div>
             @error('year_experience')
             <span style="color: red">{{ $message }}</span>
@@ -50,7 +50,7 @@
                 <label for="" class="col-form-label">Facebook URL</label>
             </div>
             <div class="col-auto">
-                <input type="text" class="form-control" name="facebookUrl">
+                <input type="text" class="form-control" name="facebookUrl" value="{{ old('facebookUrl') }}" />
             </div>
             @error('facebookUrl')
             <span style="color: red">{{ $message }}</span>

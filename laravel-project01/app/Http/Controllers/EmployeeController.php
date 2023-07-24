@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests\EmployeeRequest;
 
+use Illuminate\Support\Facades\Storage;
+
 class EmployeeController extends Controller
 {
     /**
@@ -36,8 +38,12 @@ class EmployeeController extends Controller
      */
     public function store(EmployeeRequest $request)
     {
-        return 'ok';
+        Storage::disk('public')->put('media',$request->file);
+        Storage::disk('public')->url('media');
+
+        return 'Success';
     }
+
 
     /**
      * Display the specified resource.

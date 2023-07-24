@@ -4,7 +4,7 @@ namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
 
-class CheckAddress implements Rule
+class CheckValidateUrlRule implements Rule
 {
     /**
      * Create a new rule instance.
@@ -25,7 +25,19 @@ class CheckAddress implements Rule
      */
     public function passes($attribute, $value)
     {
-        if (!is_numeric($value)) {
+        $isLocation = null;
+        $isUrl = null;
+        $url = str_replace(["ä","ö","ü"], ["ae", "oe", "ue"], $value);
+
+        if ($value != 4) {
+            $isLocation = true;
+        }
+        if (filter_var($url, FILTER_VALIDATE_URL)) {
+            $isUrl = true;
+        }
+
+
+        if ($isLocation && $isUrl) {
             return true;
         }
     }
@@ -37,6 +49,6 @@ class CheckAddress implements Rule
      */
     public function message()
     {
-        return 'Trường :attribute không được chỉ nhập mỗi số';
+        return ':attribute đang không chính xác';
     }
 }

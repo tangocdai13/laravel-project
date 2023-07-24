@@ -4,7 +4,7 @@ namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
 
-class CheckValueForMemberRule implements Rule
+class CheckNumberForPhoneRule implements Rule
 {
     /**
      * Create a new rule instance.
@@ -25,7 +25,7 @@ class CheckValueForMemberRule implements Rule
      */
     public function passes($attribute, $value)
     {
-        return $value > 1;
+        return $value[0] == 0 && strlen($value) == 10;
     }
 
     /**
@@ -35,6 +35,6 @@ class CheckValueForMemberRule implements Rule
      */
     public function message()
     {
-        return 'Có ít nhất 1 member được nhập vào';
+        return 'Số điện thoại chưa đúng định dạng';
     }
 }

@@ -4,7 +4,7 @@ namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
 
-class CheckValueForMemberRule implements Rule
+class CheckValidateForYearExperienceRule implements Rule
 {
     /**
      * Create a new rule instance.
@@ -25,7 +25,23 @@ class CheckValueForMemberRule implements Rule
      */
     public function passes($attribute, $value)
     {
-        return $value > 1;
+        $isLocation = null;
+        $isNumber = null;
+        $isMin = null;
+
+        if ($value != 4) {
+            $isLocation = true;
+        }
+        if (is_numeric($value)) {
+            $isNumber = true;
+        }
+        if ($value > 1) {
+            $isMin = true;
+        }
+
+        if ($isLocation && $isNumber && $isMin) {
+            return true;
+        }
     }
 
     /**
@@ -35,6 +51,6 @@ class CheckValueForMemberRule implements Rule
      */
     public function message()
     {
-        return 'Có ít nhất 1 member được nhập vào';
+        return ':attribute đang không chính xác';
     }
 }

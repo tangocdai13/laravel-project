@@ -9,7 +9,7 @@
                 <div class="row">
                     <div class="col-sm">
                         <h2>Form Employee</h2>
-                        <form action="{{ route('employee.store') }}" method="post">
+                        <form action="{{ route('employee.store') }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="mb-3">
                                 <label for="" class="form-label">Name Employee</label>
@@ -44,6 +44,14 @@
                             </div>
 
                             <div class="mb-3">
+                                <label for="" class="form-label">Select image to upload</label><br>
+                                <input type="file" name="file"><br>
+                                @error('file')
+                                <span style="color: red">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="mb-3">
                                 <label for="" class="form-label">Gender : </label>
                                 <label>
                                     <input type="radio" name="gender"  value="1" {{ old('gender') == 1 ? 'checked' : null }}/> Female
@@ -52,6 +60,7 @@
                                 <label>
                                     <input type="radio" name="gender"  value="2" {{ old('gender') == 2 ? 'checked' : null }} /> Male
                                 </label>
+                                <br>
                                 @error('gender')
                                 <span style="color: red">{{ $message }}</span>
                                 @enderror
@@ -59,7 +68,7 @@
                             @include('employees.info ')
 
                             <div class="mb-3">
-                                <button type="submit">Save</button>
+                                <button type="submit" name="submit">Save</button>
                             </div>
                         </form>
                     </div>

@@ -33,3 +33,4 @@ Route::prefix('admin')->as('admin.')->group(function () {
 });
 
 Route::resource('employee', EmployeeController::class);
+
