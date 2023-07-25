@@ -6,7 +6,6 @@ use Illuminate\Contracts\Validation\Rule;
 
 class CheckValidateForYearExperienceRule implements Rule
 {
-
     /**
      * Determine if the validation rule passes.
      *
@@ -20,7 +19,7 @@ class CheckValidateForYearExperienceRule implements Rule
         $isNumber = is_numeric($value);
         $isMin = $value > 1;
 
-        return ($isLocation && $isNumber && $isMin);
+        return $isLocation && $isNumber && $isMin;
     }
 
     /**

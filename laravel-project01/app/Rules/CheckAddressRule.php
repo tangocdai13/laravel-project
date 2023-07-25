@@ -15,7 +15,7 @@ class CheckAddressRule implements Rule
      */
     public function passes($attribute, $value)
     {
-        return !is_numeric($value);
+        return ! is_numeric($value);
     }
 
     /**
