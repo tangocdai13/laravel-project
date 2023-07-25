@@ -7,16 +7,6 @@ use Illuminate\Contracts\Validation\Rule;
 class CheckAddressRule implements Rule
 {
     /**
-     * Create a new rule instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        //
-    }
-
-    /**
      * Determine if the validation rule passes.
      *
      * @param  string  $attribute
@@ -25,9 +15,7 @@ class CheckAddressRule implements Rule
      */
     public function passes($attribute, $value)
     {
-        if (! is_numeric($value)) {
-            return true;
-        }
+        return !is_numeric($value);
     }
 
     /**

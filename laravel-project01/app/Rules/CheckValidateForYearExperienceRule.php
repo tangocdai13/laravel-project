@@ -6,15 +6,6 @@ use Illuminate\Contracts\Validation\Rule;
 
 class CheckValidateForYearExperienceRule implements Rule
 {
-    /**
-     * Create a new rule instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        //
-    }
 
     /**
      * Determine if the validation rule passes.
@@ -25,23 +16,11 @@ class CheckValidateForYearExperienceRule implements Rule
      */
     public function passes($attribute, $value)
     {
-        $isLocation = null;
-        $isNumber = null;
-        $isMin = null;
+        $isLocation = $value != 4;
+        $isNumber = is_numeric($value);
+        $isMin = $value > 1;
 
-        if ($value != 4) {
-            $isLocation = true;
-        }
-        if (is_numeric($value)) {
-            $isNumber = true;
-        }
-        if ($value > 1) {
-            $isMin = true;
-        }
-
-        if ($isLocation && $isNumber && $isMin) {
-            return true;
-        }
+        return ($isLocation && $isNumber && $isMin);
     }
 
     /**

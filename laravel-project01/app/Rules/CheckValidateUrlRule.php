@@ -7,16 +7,6 @@ use Illuminate\Contracts\Validation\Rule;
 class CheckValidateUrlRule implements Rule
 {
     /**
-     * Create a new rule instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        //
-    }
-
-    /**
      * Determine if the validation rule passes.
      *
      * @param  string  $attribute
@@ -25,20 +15,11 @@ class CheckValidateUrlRule implements Rule
      */
     public function passes($attribute, $value)
     {
-        $isLocation = null;
-        $isUrl = null;
         $url = str_replace(['ä', 'ö', 'ü'], ['ae', 'oe', 'ue'], $value);
+        $isLocation = $value != 4;
+        $isUrl = filter_var($url, FILTER_VALIDATE_URL);
 
-        if ($value != 4) {
-            $isLocation = true;
-        }
-        if (filter_var($url, FILTER_VALIDATE_URL)) {
-            $isUrl = true;
-        }
-
-        if ($isLocation && $isUrl) {
-            return true;
-        }
+        return $isLocation && $isUrl;
     }
 
     /**
