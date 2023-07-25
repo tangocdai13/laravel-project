@@ -27,7 +27,7 @@ class CheckValidateUrlRule implements Rule
     {
         $isLocation = null;
         $isUrl = null;
-        $url = str_replace(["ä","ö","ü"], ["ae", "oe", "ue"], $value);
+        $url = str_replace(['ä', 'ö', 'ü'], ['ae', 'oe', 'ue'], $value);
 
         if ($value != 4) {
             $isLocation = true;
@@ -35,7 +35,6 @@ class CheckValidateUrlRule implements Rule
         if (filter_var($url, FILTER_VALIDATE_URL)) {
             $isUrl = true;
         }
-
 
         if ($isLocation && $isUrl) {
             return true;
