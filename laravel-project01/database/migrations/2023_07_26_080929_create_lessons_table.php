@@ -13,16 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('lessons', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 255);
-            $table->string('phone', 255)->unique()->default(null);
-            $table->string('email', 255)->unique();
-            $table->string('password', 255);
-            $table->timestamp('email_verified_at');
-            $table->tinyInteger('type')->comment('1: Admin system, 2: teacher, 3: Student');
-//            $table->rememberToken();
-            $table->timestamp('deleted_at')->nullable();
+            $table->bigInteger('course_id')->length(20)->foreign('course_id')->references('id')->on('courses');
+            $table->bigInteger('section_id')->length(20)->default(null);
+            $table->tinyInteger('video_type')->length(4);
+            $table->string('video_url', 255);
+            $table->string('time', 255);
+            $table->boolean('preview');
+            $table->text('content');
             $table->timestamps();
         });
     }
@@ -34,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('lessons');
     }
 };
