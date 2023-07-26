@@ -13,11 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        if(!Schema::hasTable('sections')){
+        if (! Schema::hasTable('sections')) {
             Schema::create('sections', function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('name', 255);
-                $table->bigInteger('course_id')->length(20)->foreign('course_id')->references('id')->on('courses');;
+                $table->bigInteger('course_id')->length(20)->foreign('course_id')->references('id')->on('courses');
                 $table->timestamps();
             });
         }
