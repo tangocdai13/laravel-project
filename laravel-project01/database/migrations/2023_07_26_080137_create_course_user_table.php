@@ -13,15 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        if (! Schema::hasTable('course_user')) {
-            Schema::create('course_user', function (Blueprint $table) {
-                $table->increments('id');
-                $table->bigInteger('course_id')->length(20)->foreign('course_id')->references('id')->on('courses');
-                $table->bigInteger('user_id')->length(20)->foreignId('user_id')->references('id')->on('users');
-                $table->boolean('paid')->default(false);
-                $table->timestamps();
-            });
-        }
+        Schema::create('course_user', function (Blueprint $table) {
+            $table->increments('id');
+            $table->bigInteger('course_id')->length(20)->foreign('course_id')->references('id')->on('courses');
+            $table->bigInteger('user_id')->length(20)->foreignId('user_id')->references('id')->on('users');
+            $table->boolean('paid')->default(false);
+            $table->timestamps();
+        });
     }
 
     /**
