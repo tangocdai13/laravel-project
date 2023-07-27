@@ -13,15 +13,20 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
-            $table->timestamps();
-        });
+        if (! Schema::hasTable('users')) {
+            Schema::create('users', function (Blueprint $table) {
+                $table->increments('id');
+                $table->string('name', 255);
+                $table->string('phone', 255)->unique()->default(null);
+                $table->string('email', 255)->unique();
+                $table->string('password', 255);
+                $table->timestamp('email_verified_at');
+                $table->tinyInteger('type')->comment('1: Admin system, 2: teacher, 3: Student');
+//            $table->rememberToken();
+                $table->timestamp('deleted_at')->nullable();
+                $table->timestamps();
+            });
+        }
     }
 
     /**
