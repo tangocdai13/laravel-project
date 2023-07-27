@@ -7,6 +7,7 @@ use App\Rules\CheckNumberForPhoneRule;
 use App\Rules\CheckValidateForYearExperienceRule;
 use App\Rules\CheckValidateUrlRule;
 use App\Rules\CheckValueForMemberRule;
+use App\Rules\ChecValidateLinkForUrlFacebook;
 use Illuminate\Foundation\Http\FormRequest;
 
 class EmployeeRequest extends FormRequest
@@ -42,7 +43,7 @@ class EmployeeRequest extends FormRequest
             'locations' => ['required'],
             'person_dependent' => ['nullable', 'integer', new CheckValueForMemberRule],
             'year_experience' => [new CheckValidateForYearExperienceRule],
-            'facebookUrl' => [new CheckValidateUrlRule],
+            'facebookUrl' => [new CheckValidateUrlRule, new ChecValidateLinkForUrlFacebook],
         ];
     }
 
