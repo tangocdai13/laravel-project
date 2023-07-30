@@ -23,7 +23,7 @@ class AttachmentFactory extends Factory
             'attachable_id' => 1,
             'extension' => 'google chrome',
             'mime_type' => 'jpg',
-            'size' => '10000'
+            'size' => '10000',
         ];
     }
 }

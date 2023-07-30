@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Course;
 
 class Category extends Model
 {
@@ -20,7 +19,7 @@ class Category extends Model
         'content',
         'meta_title',
         'meta_desc',
-        'meta_keyword'
+        'meta_keyword',
     ];
 
     public function courses()

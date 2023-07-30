@@ -33,7 +33,7 @@ class CourseFactory extends Factory
             'content' => fake()->paragraph,
             'meta_title' => fake()->title,
             'meta_desc' => fake()->paragraph,
-            'meta_keyword' => 'meta_keyword 1'
+            'meta_keyword' => 'meta_keyword 1',
         ];
     }
 }

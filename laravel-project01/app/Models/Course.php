@@ -4,16 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Category;
-use App\Models\User;
-use App\Models\Section;
-use App\Models\Lesson;
 
 class Course extends Model
 {
     use HasFactory;
 
     protected $table = 'courses';
+
     protected $fillable = [
         'name',
         'slug',
@@ -31,7 +28,7 @@ class Course extends Model
         'content',
         'meta_title',
         'meta_desc',
-        'meta_keyword'
+        'meta_keyword',
     ];
 
     public function category()

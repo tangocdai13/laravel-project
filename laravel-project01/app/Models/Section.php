@@ -4,17 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Course;
-use App\Models\Lesson;
 
 class Section extends Model
 {
     use HasFactory;
 
     protected $table = 'sections';
+
     protected $fillable = [
         'name',
-        'course_id'
+        'course_id',
     ];
 
     public function course()

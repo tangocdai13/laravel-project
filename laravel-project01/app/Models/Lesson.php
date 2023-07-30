@@ -4,14 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Course;
-use App\Models\Section;
 
 class Lesson extends Model
 {
     use HasFactory;
 
     protected $table = 'lessons';
+
     protected $fillable = [
         'name',
         'course_id',
@@ -20,7 +19,7 @@ class Lesson extends Model
         'video_url',
         'time',
         'preview',
-        'content'
+        'content',
     ];
 
     public function course()
