@@ -48,6 +48,13 @@ class User extends Authenticatable
 
     public function courses()
     {
-        return $this->belongsToMany(Course::class);
+        return $this->belongsToMany(Course::class)
+            ->withPivot('paid')
+            ->wherePivot('paid', '>', 3);
+    }
+
+    public function profile()
+    {
+        return $this->hasOne(Profile::class);
     }
 }
