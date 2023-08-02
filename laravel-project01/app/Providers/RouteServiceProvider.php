@@ -19,6 +19,11 @@ class RouteServiceProvider extends ServiceProvider
      */
     public const HOME = '/dashboard';
 
+    // đặt tên const để redirect log -> màn admin
+    public const HOME_MAIN = '/admin';
+
+    public const LOGIN = '/login';
+
     /**
      * Define your route model bindings, pattern filters, and other route configuration.
      *

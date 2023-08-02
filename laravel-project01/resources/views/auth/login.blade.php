@@ -1,14 +1,18 @@
 <x-guest-layout>
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
-
+    @if($errors->any())
+        <div class="alert alert-danger text-center">
+            <span style="color: red">Đã có lỗi xảy ra, vui lòng nhập lại</span>
+        </div>
+    @endif
     <form method="POST" action="{{ route('login') }}">
         @csrf
 
         <!-- Email Address -->
         <div>
             <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
+            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')"/>
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
@@ -18,8 +22,7 @@
 
             <x-text-input id="password" class="block mt-1 w-full"
                             type="password"
-                            name="password"
-                            required autocomplete="current-password" />
+                            name="password" />
 
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>

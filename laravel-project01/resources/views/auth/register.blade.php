@@ -1,4 +1,9 @@
 <x-guest-layout>
+    @if($errors->any())
+        <div class="alert alert-danger text-center">
+            <span style="color: red">Đã có lỗi xảy ra, vui lòng nhập lại</span>
+        </div>
+    @endif
     <form method="POST" action="{{ route('register') }}">
         @csrf
 

@@ -1,5 +1,13 @@
 <?php
 
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\CustomerController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,3 +37,16 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+//dashboard used group prefix
+Route::prefix('admin')->as('admin.')->group(function () {
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+    Route::resource('category', CategoryController::class);
+    Route::resource('customer', CustomerController::class);
+    Route::resource('order', OrderController::class);
+    Route::resource('product', ProductController::class);
+    Route::resource('setting', SettingController::class);
+    Route::resource('user', UserController::class);
+});
+
+Route::resource('employee', EmployeeController::class);
