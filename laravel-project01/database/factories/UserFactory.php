@@ -20,9 +20,11 @@ class UserFactory extends Factory
             'name' => fake()->name(),
             'phone' => fake()->e164PhoneNumber,
             'email' => fake()->unique()->freeEmail(),
+            'gender' => fake()->numberBetween(1, 2),
+            'family_id' => fake()->numberBetween(1, 90),
             'password' => bcrypt('123456'),
             'email_verified_at' => now(),
-            'type' => 1,
+            'type' => fake()->numberBetween(1, 3),
             'deleted_at' => fake()->dateTime,
         ];
     }

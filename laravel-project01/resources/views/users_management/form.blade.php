@@ -58,6 +58,24 @@
                             <x-text-input id="password_confirm" name="password_confirm" type="password" class="mt-1 block w-full" :value="old('password_confirm')" />
                             <x-input-error class="mt-2" :messages="$errors->get('password_confirm')" />
                         </div>
+                        <div>
+                            <x-input-label for="family_id" :value="__('Family Name')" />
+                            <select name="family_id">
+                                <option value="0">Tất cả hộ gia đình</option>
+                                    @foreach($families as $family)
+                                        <option
+                                            value="{{ $family->id }}"
+                                            @if(!empty($user))
+                                                {{ ($family->id == $user->family_id) ? 'selected' : false}}
+                                            @else
+                                                {{ old('family_id') == $family->id ? 'selected' : false }}
+                                            @endif
+                                            >{{ $family->name }}
+                                        </option>
+                                    @endforeach
+                            </select>
+                            <x-input-error class="mt-2" :messages="$errors->get('family_id')" />
+                        </div>
 
                         <div class="flex items-center gap-4">
                             <x-primary-button>{{ __('Save') }}</x-primary-button>

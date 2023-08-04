@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Family;
 use Illuminate\Database\Seeder;
 
 class FamilySeeder extends Seeder
@@ -14,6 +14,6 @@ class FamilySeeder extends Seeder
      */
     public function run()
     {
-        //
+        Family::factory()->count(10)->create();
     }
 }
