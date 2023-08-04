@@ -12,6 +12,17 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    const GENDER = [
+        'male' => 1,
+        'female' => 2,
+    ];
+
+    const TYPE = [
+        'Admin_System' => 1,
+        'Teacher' => 2,
+        'Student' => 3,
+    ];
+
     /**
      * The attributes that are mass assignable.
      *
@@ -21,10 +32,9 @@ class User extends Authenticatable
         'name',
         'phone',
         'email',
+        'gender',
         'password',
-        'email_verified_at',
         'type',
-        'deleted_at',
     ];
 
     /**
@@ -56,5 +66,40 @@ class User extends Authenticatable
     public function profile()
     {
         return $this->hasOne(Profile::class);
+    }
+
+    public function getGenderLabelAttribute()
+    {
+        if ($this->attributes['gender'] == static::GENDER['male'])
+        {
+            return 'Male';
+        }
+
+        if ($this->attributes['gender'] == static::GENDER['female'])
+        {
+            return 'Female';
+        }
+
+        return null;
+    }
+
+    public function getUserTypeAttribute()
+    {
+        if ($this->attributes['type'] == static::TYPE['Admin_System'])
+        {
+            return 'Administrator';
+        }
+
+        if ($this->attributes['type'] == static::TYPE['Teacher'])
+        {
+            return 'Teacher';
+        }
+
+        if ($this->attributes['type'] == static::TYPE['Student'])
+        {
+            return 'Student';
+        }
+
+        return null;
     }
 }
