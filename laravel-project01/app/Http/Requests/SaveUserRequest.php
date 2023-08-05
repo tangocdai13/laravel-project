@@ -24,23 +24,28 @@ class SaveUserRequest extends FormRequest
      */
     public function rules()
     {
-        $rules =  [
+        $rules = [
             'name' => ['required'],
             'phone' => ['required', 'numeric'],
             'email' => ['required', 'email', Rule::unique('users')->ignore($this->user)],
             'gender' => ['required', 'in:1,2'],
+            'family_id' => ['required', 'numeric', function ($attribute, $value, $fail) {
+                if ($value == 0) {
+                    $fail('Data input cannot accpeted');
+                }
+            }],
         ];
 
-        if (empty($this->user))
-        {
+        if (empty($this->user)) {
             $rules['password'] = ['required', 'min:6'];
             $rules['password_confirm'] = ['required', 'same:password'];
+            $rules['avatar'] = ['required', 'mimes:jpg,png,gif,webp','max:5000'];
         }
 
-        if (!empty($this->user))
-        {
+        if (! empty($this->user)) {
             $rules['password'] = ['nullable', 'min:6'];
             $rules['password_confirm'] = ['nullable', 'same:password'];
+            $rules['avatar'] = ['nullable', 'mimes:jpg,png,gif,webp', 'max:5000'];
         }
 
         return $rules;

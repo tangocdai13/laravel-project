@@ -33,6 +33,8 @@ class User extends Authenticatable
         'phone',
         'email',
         'gender',
+        'avatar',
+        'family_id',
         'password',
         'type',
     ];
@@ -70,13 +72,11 @@ class User extends Authenticatable
 
     public function getGenderLabelAttribute()
     {
-        if ($this->attributes['gender'] == static::GENDER['male'])
-        {
+        if ($this->attributes['gender'] == static::GENDER['male']) {
             return 'Male';
         }
 
-        if ($this->attributes['gender'] == static::GENDER['female'])
-        {
+        if ($this->attributes['gender'] == static::GENDER['female']) {
             return 'Female';
         }
 
@@ -85,21 +85,23 @@ class User extends Authenticatable
 
     public function getUserTypeAttribute()
     {
-        if ($this->attributes['type'] == static::TYPE['Admin_System'])
-        {
+        if ($this->attributes['type'] == static::TYPE['Admin_System']) {
             return 'Administrator';
         }
 
-        if ($this->attributes['type'] == static::TYPE['Teacher'])
-        {
+        if ($this->attributes['type'] == static::TYPE['Teacher']) {
             return 'Teacher';
         }
 
-        if ($this->attributes['type'] == static::TYPE['Student'])
-        {
+        if ($this->attributes['type'] == static::TYPE['Student']) {
             return 'Student';
         }
 
         return null;
+    }
+
+    public function family()
+    {
+        return $this->belongsTo(Family::class, 'family_id', 'id');
     }
 }

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\User;
 use App\Http\Requests\SaveUserRequest;
-use Illuminate\Support\Facades\Hash;
+use App\Models\Family;
+use App\Models\User;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -14,10 +14,20 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    protected $families;
+
+    protected $uses;
+
+    public function __construct()
+    {
+        $this->families = new Family;
+        $this->users = new User;
+    }
+
     public function index()
     {
         return view('users_management.index', [
-            'users' => User::orderBy('id', 'desc')->get()
+            'users' => $this->users->orderBy('id', 'desc')->get(),
         ]);
     }
 
@@ -28,7 +38,9 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('users_management.form');
+        return view('users_management.form', [
+            'families' => $this->families->getAllFamily(),
+        ]);
     }
 
     /**
@@ -39,14 +51,16 @@ class UserController extends Controller
      */
     public function store(SaveUserRequest $request)
     {
-        User::create([
-            'name' => $request->name,
-            'phone' => $request->phone,
-            'email' => $request->email,
-            'gender' => $request->gender,
-            'password' => Hash::make($request->password),
-            'type' => User::TYPE['Admin_System']
-        ]);
+        $inputs = $request->all();
+        $inputs['password'] = bcrypt($request->password);
+        $inputs['type'] = User::TYPE['Admin_System'];
+
+        if ($request->avatar) {
+            $path = Storage::disk('public')->put('media', $request->avatar);
+            $inputs['avatar'] = Storage::disk('public')->url($path);
+        }
+
+        User::create($inputs);
 
         return to_route('user.index');
     }
@@ -70,8 +84,13 @@ class UserController extends Controller
      */
     public function edit($id)
     {
+        $url = $this->users->find($id)->avatar;
+        $avatarName = basename($url);
+
         return view('users_management.form', [
-            'user' => User::find($id)
+            'user' => $this->users->find($id),
+            'families' => $this->families->getAllFamily(),
+            'avatarName' => $avatarName,
         ]);
     }
 
@@ -88,6 +107,12 @@ class UserController extends Controller
         if ($request->password) {
             $inputs['password'] = bcrypt($request->password);
         }
+
+        if ($request->avatar) {
+            $path = Storage::disk('public')->put('media', $request->avatar);
+            $inputs['avatar'] = Storage::disk('public')->url($path);
+        }
+
         User::find($id)->update($inputs);
 
         return to_route('user.index');
