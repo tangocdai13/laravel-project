@@ -53,6 +53,7 @@
                                 <x-text-input id="avatar" name="avatar" type="file" class="mt-1 block w-full" />
                             @else
                                 <x-text-input id="avatar" name="avatar" type="file" class="mt-1 block w-full" />
+                                <br>
                                 <img style="width: 250px; height: 150px" src="{{ asset('/storage/media/'. $avatarName) }}" alt="No image">
                             @endif
                             <x-input-error class="mt-2" :messages="$errors->get('avatar')" />

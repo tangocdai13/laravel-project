@@ -39,13 +39,13 @@ class SaveUserRequest extends FormRequest
         if (empty($this->user)) {
             $rules['password'] = ['required', 'min:6'];
             $rules['password_confirm'] = ['required', 'same:password'];
-            $rules['avatar'] = ['required', 'max:5000'];
+            $rules['avatar'] = ['required', 'mimes:jpg,png,gif,webp','max:5000'];
         }
 
         if (! empty($this->user)) {
             $rules['password'] = ['nullable', 'min:6'];
             $rules['password_confirm'] = ['nullable', 'same:password'];
-            $rules['avatar'] = ['nullable', 'max:5000'];
+            $rules['avatar'] = ['nullable', 'mimes:jpg,png,gif,webp', 'max:5000'];
         }
 
         return $rules;
