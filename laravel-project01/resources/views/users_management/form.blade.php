@@ -12,7 +12,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <form method="post" action="{{ !empty($user) ? route('user.update', ['user' => $user->id]) : route('user.store')}}" class="mt-6 space-y-6">
+                    <form method="post" action="{{ !empty($user) ? route('user.update', ['user' => $user->id]) : route('user.store')}}" class="mt-6 space-y-6"  enctype="multipart/form-data">
                         @csrf
                         @if(!empty($user))
                             @method('PUT')
@@ -48,6 +48,17 @@
                         </div>
 
                         <div>
+                            <x-input-label for="avatar" :value="__('Avatar')" />
+                            @if(empty($user))
+                                <x-text-input id="avatar" name="avatar" type="file" class="mt-1 block w-full" />
+                            @else
+                                <x-text-input id="avatar" name="avatar" type="file" class="mt-1 block w-full" />
+                                <img style="width: 250px; height: 150px" src="{{ asset('/storage/media/'. $avatarName) }}" alt="No image">
+                            @endif
+                            <x-input-error class="mt-2" :messages="$errors->get('avatar')" />
+                        </div>
+
+                        <div>
                             <x-input-label for="password" :value="__('Password')" />
                             <x-text-input id="password" name="password" type="password" class="mt-1 block w-full" :value="old('password')" />
                             <x-input-error class="mt-2" :messages="$errors->get('password')" />
@@ -58,6 +69,7 @@
                             <x-text-input id="password_confirm" name="password_confirm" type="password" class="mt-1 block w-full" :value="old('password_confirm')" />
                             <x-input-error class="mt-2" :messages="$errors->get('password_confirm')" />
                         </div>
+
                         <div>
                             <x-input-label for="family_id" :value="__('Family Name')" />
                             <select name="family_id">
@@ -66,7 +78,7 @@
                                         <option
                                             value="{{ $family->id }}"
                                             @if(!empty($user))
-                                                {{ ($family->id == $user->family_id) ? 'selected' : false}}
+                                                {{ old('family_id', $family->id ?? null) == $user->family_id ? 'selected' : false }}
                                             @else
                                                 {{ old('family_id') == $family->id ? 'selected' : false }}
                                             @endif

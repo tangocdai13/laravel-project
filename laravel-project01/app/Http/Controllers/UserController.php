@@ -55,6 +55,11 @@ class UserController extends Controller
         $inputs['password'] = bcrypt($request->password);
         $inputs['type'] = User::TYPE['Admin_System'];
 
+        if ($request->avatar) {
+            $path = Storage::disk('public')->put('media', $request->avatar);
+            $inputs['avatar'] = Storage::disk('public')->url($path);
+        }
+
         User::create($inputs);
 
         return to_route('user.index');
@@ -79,10 +84,13 @@ class UserController extends Controller
      */
     public function edit($id)
     {
+        $url = $this->users->find($id)->avatar;
+        $avatarName = basename($url);
+
         return view('users_management.form', [
             'user' => $this->users->find($id),
             'families' => $this->families->getAllFamily(),
-            //            'familyDetail' => $this->users->find($id)->family
+            'avatarName' => $avatarName,
         ]);
     }
 
@@ -99,6 +107,12 @@ class UserController extends Controller
         if ($request->password) {
             $inputs['password'] = bcrypt($request->password);
         }
+
+        if ($request->avatar) {
+            $path = Storage::disk('public')->put('media', $request->avatar);
+            $inputs['avatar'] = Storage::disk('public')->url($path);
+        }
+
         User::find($id)->update($inputs);
 
         return to_route('user.index');

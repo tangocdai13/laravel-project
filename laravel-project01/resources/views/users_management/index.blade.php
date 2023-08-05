@@ -39,7 +39,7 @@
                                         <a href="{{ route('user.edit', ['user' => $user->id]) }}">Edit </a>
                                     </td>
                                     <td>
-                                        <form action="{{ route('user.destroy', ['user' => $user->id]) }}" method="POST" onclick="return confirm('Bạn có chắc muốn xoá không?')">
+                                        <form onclick="return confirm('Bạn có chắc muốn xoá không?')" action="{{ route('user.destroy', ['user' => $user->id]) }}" method="POST">
                                             @method('DELETE')
                                             @csrf
                                             <button type="submit">Delete</button>
